@@ -13,13 +13,16 @@ class MyApp extends StatelessWidget {
           title: Text('My First App'),
           backgroundColor: Colors.blueGrey,
         ),
-        body: Center(
-          child: Image(
-              image: AssetImage(
-                  'images/nature.jpg'),
-          ),
+        body: Column(
+          children: [
+            Text('first question'),
+            
+          ],
         ),
       ),
     );
   }
+}
+
+class RaisedButton {
 }
