@@ -94,44 +94,49 @@ class _NilaiInputState extends State<NilaiInput> {
               },
             ),
             SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  double matematika = double.parse(matematikaController.text);
-                  double inggris = double.parse(inggrisController.text);
-                  double java = double.parse(javaController.text);
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Menyusun tombol secara horizontal dengan jarak yang merata
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      double matematika = double.parse(matematikaController.text);
+                      double inggris = double.parse(inggrisController.text);
+                      double java = double.parse(javaController.text);
 
-                  double total = matematika + inggris + java;
-                  double rataRata = total / 3;
+                      double total = matematika + inggris + java;
+                      double rataRata = total / 3;
 
-                  // Navigasi ke jendela output
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => NilaiOutput(
-                        noBP: noBPController.text,
-                        nama: namaController.text,
-                        matematika: matematikaController.text,
-                        inggris: inggrisController.text,
-                        java: javaController.text,
-                        rataRata: rataRata.toString(),
-                      ),
-                    ),
-                  );
-                }
-              },
-              child: Text('OK'),
+                      // Navigasi ke jendela output
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NilaiOutput(
+                            noBP: noBPController.text,
+                            nama: namaController.text,
+                            matematika: matematikaController.text,
+                            inggris: inggrisController.text,
+                            java: javaController.text,
+                            rataRata: rataRata.toString(),
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                  child: Text('OK'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    noBPController.clear();
+                    namaController.clear();
+                    matematikaController.clear();
+                    inggrisController.clear();
+                    javaController.clear();
+                  },
+                  child: Text('Reset'),
+                ),
+              ],
             ),
-            ElevatedButton(
-    onPressed: () {
-    noBPController.clear();
-    namaController.clear();
-    matematikaController.clear();
-    inggrisController.clear();
-    javaController.clear();
-  },
-  child: Text('Reset'),
-),
           ],
         ),
       ),
