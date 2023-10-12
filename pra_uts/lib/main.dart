@@ -120,8 +120,18 @@ class _NilaiInputState extends State<NilaiInput> {
                   );
                 }
               },
-              child: Text('Hitung Rata-rata'),
+              child: Text('OK'),
             ),
+            ElevatedButton(
+    onPressed: () {
+    noBPController.clear();
+    namaController.clear();
+    matematikaController.clear();
+    inggrisController.clear();
+    javaController.clear();
+  },
+  child: Text('Reset'),
+),
           ],
         ),
       ),
