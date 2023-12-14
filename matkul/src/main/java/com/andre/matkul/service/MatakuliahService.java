@@ -6,7 +6,6 @@ package com.andre.matkul.service;
 import com.andre.matkul.entity.Matakuliah;
 import com.andre.matkul.repository.MatakuliahRepository;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,27 +16,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MatakuliahService {
-    private final MatakuliahRepository matakuliahRepository;
-    @Autowired
-    public MatakuliahService(MatakuliahRepository matakuliahRepository){
-        this.matakuliahRepository = matakuliahRepository;
-    }
-    
-    public Matakuliah getMatakuliah(Long idmatakuliah){
-        return matakuliahRepository.findById(idmatakuliah).get();
-    }
-
+        @Autowired
+    private MatakuliahRepository matakuliahRepository;
     
     public List<Matakuliah> getAll(){
         return matakuliahRepository.findAll();
     }
     
-    public void insert(Matakuliah matakuliah){
-        Optional<Matakuliah> matakuliahOptional = 
-                matakuliahRepository.findMatakuliahById(matakuliah.getId());
-        if(matakuliahOptional.isPresent()){
-            throw new IllegalStateException("Email Sudah Ada");
-        }
-        matakuliahRepository.save(matakuliah);
-    }
+    public Matakuliah getMatakuliah(Long idmatakuliah){
+        return matakuliahRepository.findById(idmatakuliah).get();
+    } 
 }

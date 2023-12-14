@@ -4,7 +4,7 @@
  */
 package com.andre.nilai.repository;
 import com.andre.nilai.entity.Nilai;
-import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface NilaiRepository extends  JpaRepository<Nilai, Long> {
-    public Optional<Nilai> findNilaiById(Long id);
+    
 }
     
 

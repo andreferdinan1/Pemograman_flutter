@@ -8,8 +8,7 @@ import com.andre.matkul.service.MatakuliahService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,13 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class MatakuliahController {
     @Autowired
     private MatakuliahService matakuliahService;
+    
     @GetMapping
     public List<Matakuliah> getAll(){
         return matakuliahService.getAll();
     }
     
-    @PostMapping
-    public void insert(@RequestBody Matakuliah matakuliah){
-        matakuliahService.insert(matakuliah);
+    @GetMapping(path = "{id}")
+    public Matakuliah getMatakuliah(@PathVariable("id") Long id){
+        return matakuliahService.getMatakuliah(id); 
     }
 }

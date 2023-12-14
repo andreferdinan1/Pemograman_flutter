@@ -6,10 +6,14 @@ package com.andre.nilai.service;
 
 import com.andre.nilai.entity.Nilai;
 import com.andre.nilai.repository.NilaiRepository;
+import com.andre.nilai.vo.Mahasiswa;
+import com.andre.nilai.vo.Matakuliah;
+import com.andre.nilai.vo.ResponseTemplateVo;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -18,25 +22,34 @@ import org.springframework.stereotype.Service;
 @Service
 public class NilaiService {
     
-    private final NilaiRepository nilaiRepository;
     @Autowired
-    public NilaiService(NilaiRepository nilaiRepository){
-        this.nilaiRepository = nilaiRepository;
-    }
-   
-    public List<Nilai> getAll(){
+    private NilaiRepository nilaiRepository;
+    
+    @Autowired
+    private RestTemplate restTemplate;
+    
+    public List<Nilai> getAllNilai(){
         return nilaiRepository.findAll();
     }
     
     public void insert(Nilai nilai){
-        Optional<Nilai> nilaiOptional = 
-                nilaiRepository.findNilaiById(nilai.getId());
-        if(nilaiOptional.isPresent()){
-            throw new IllegalStateException("Email Sudah Ada");
-        }
         nilaiRepository.save(nilai);
     }
     
-   
+    public ResponseTemplateVo getNilai(Long idnilai){
+        ResponseTemplateVo vo = new ResponseTemplateVo();
+        Nilai nilai = nilaiRepository.findById(idnilai).get();
+        
+        Mahasiswa mahasiswa = 
+                restTemplate.getForObject("http://localhost:9001/api/v1/mahasiswa/"+ 
+                        nilai.getIdmahasiswa() , Mahasiswa.class);
+        Matakuliah matakuliah = 
+                restTemplate.getForObject("http://localhost:9002/api/v1/matakuliah/"+ 
+                        nilai.getIdmatakuliah(), Matakuliah.class);   
+        vo.setNilai(nilai);
+        vo.setMahasiswa(mahasiswa);
+        vo.setMatakuliah(matakuliah);
+        return vo;
+    }
     
 }

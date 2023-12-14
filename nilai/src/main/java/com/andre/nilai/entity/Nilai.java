@@ -19,20 +19,22 @@ import jakarta.persistence.Table;
 public class Nilai {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
+    private Long id;
     private Long idmahasiswa;
     private Long idmatakuliah;
-    private float nilai;
-    
+    private double Nilai;
+
     public Nilai() {
     }
 
-    public Nilai(Long id, Long idmahasiswa, Long idmatakuliah, float nilai) {
+    public Nilai(Long id, Long idmahasiswa, Long idmatakuliah, double Nilai) {
         this.id = id;
         this.idmahasiswa = idmahasiswa;
         this.idmatakuliah = idmatakuliah;
-        this.nilai = nilai;
+        this.Nilai = Nilai;
     }
+    
+    
 
     public Long getId() {
         return id;
@@ -58,17 +60,17 @@ public class Nilai {
         this.idmatakuliah = idmatakuliah;
     }
 
-    public float getNilai() {
-        return nilai;
+    public double getNilai() {
+        return Nilai;
     }
 
-    public void setNilai(float nilai) {
-        this.nilai = nilai;
+    public void setNilai(double Nilai) {
+        this.Nilai = Nilai;
     }
 
     @Override
     public String toString() {
-        return "Nilai{" + "id=" + id + ", idmahasiswa=" + idmahasiswa + ", idmatakuliah=" + idmatakuliah + ", nilai=" + nilai + '}';
+        return "Nilai{" + "id=" + id + ", idmahasiswa=" + idmahasiswa + ", idmatakuliah=" + idmatakuliah + ", Nilai=" + Nilai + '}';
     }
     
     

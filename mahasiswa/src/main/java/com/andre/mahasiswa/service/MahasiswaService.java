@@ -21,8 +21,9 @@ import org.springframework.stereotype.Service;
 public class MahasiswaService {
     
     private final MahasiswaRepository mahasiswaRepository;
+    
     @Autowired
-    public MahasiswaService(MahasiswaRepository mahasiswaRepository){
+    public MahasiswaService(MahasiswaRepository mahasiswaRepository) {
         this.mahasiswaRepository = mahasiswaRepository;
     }
     
@@ -30,14 +31,18 @@ public class MahasiswaService {
         return mahasiswaRepository.findAll();
     }
     
+    public Mahasiswa getMahasiswa(Long idmahasiswa){
+        return mahasiswaRepository.findById(idmahasiswa).get();
+    }
+    
     public void insert(Mahasiswa mahasiswa){
         Optional<Mahasiswa> mahasiswaOptional = 
-           mahasiswaRepository.findMahasiswaByEmail(mahasiswa.getEmail());
+                mahasiswaRepository.findMahasiswaByEmail(mahasiswa.getEmail());
         if(mahasiswaOptional.isPresent()){
-            throw new IllegalStateException("Email Sudah Ada");    
-            }
-           mahasiswaRepository.save(mahasiswa);
+            throw new IllegalStateException("Email sudah ada");
         }
+        mahasiswaRepository.save(mahasiswa);
+    }
     
     public void delete(Long mahasiswaId){
         boolean ada = mahasiswaRepository.existsById(mahasiswaId);

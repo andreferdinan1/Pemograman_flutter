@@ -30,18 +30,25 @@ public class MahasiswaController {
     private MahasiswaService mahasiswaService;
     
     @GetMapping
-    public List<Mahasiswa>getAll(){
+    public List<Mahasiswa> getAll(){
         return mahasiswaService.getAll();
+    }
+    
+    @GetMapping(path = "{id}")
+    public Mahasiswa getMahasiswa(@PathVariable("id") Long id){
+        return mahasiswaService.getMahasiswa(id); 
     }
     
     @PostMapping
     public void insert(@RequestBody Mahasiswa mahasiswa){
-        mahasiswaService.insert(mahasiswa);
+        mahasiswaService.insert(mahasiswa); 
     }
+    
     @DeleteMapping(path = "{mahasiswaId}")
     public void delete(@PathVariable("mahasiswaId") Long id) {
         mahasiswaService.delete(id); 
     }
+    
     @PutMapping(path = "{mahasiswaId}")
     public void update(@PathVariable("mahasiswaId") Long MahasiswaId,
             @RequestParam(required = false) String nama,
