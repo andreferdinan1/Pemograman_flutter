@@ -35,6 +35,10 @@ public class MahasiswaController {
     }
     
     @GetMapping(path = "{id}")
+    public Mahasiswa getMahasiswaById(@PathVariable("id") Long id){
+        return mahasiswaService.getMahasiswaById(id); 
+    }
+    
     public Mahasiswa getMahasiswa(@PathVariable("id") Long id){
         return mahasiswaService.getMahasiswa(id); 
     }

@@ -31,6 +31,10 @@ public class MahasiswaService {
         return mahasiswaRepository.findAll();
     }
     
+    public Mahasiswa getMahasiswaById(Long id){
+        return mahasiswaRepository.findById(id).get();
+    }
+    
     public Mahasiswa getMahasiswa(Long idmahasiswa){
         return mahasiswaRepository.findById(idmahasiswa).get();
     }
